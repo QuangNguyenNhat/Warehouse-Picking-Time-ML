@@ -1,4 +1,9 @@
+# Core data and scientific computing libraries
 numpy
 pandas
+
+# Machine learning and model evaluation
 scikit-learn
+
+# Plotting and visualization
 matplotlib
