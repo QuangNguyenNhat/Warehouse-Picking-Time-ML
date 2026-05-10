@@ -111,3 +111,29 @@ plt.xticks(rotation=30, ha='right')
 plt.tight_layout()
 plt.savefig(os.path.join(output_dir, 'Task5_model_comparison.png'))
 plt.close()
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+axes = axes.flatten()
+
+model_configs = [
+    ('Linear Regression', trained_models['Linear Regression'], X_test),
+    ('Ridge Regression', trained_models['Ridge Regression'], X_test_scaled),
+    ('Random Forest Regressor', trained_models['Random Forest Regressor'], X_test),
+    ('MLP Regressor', trained_models['MLP Regressor'], X_test_scaled),
+]
+
+for idx, (name, model, x_test_data) in enumerate(model_configs):
+    y_pred = model.predict(x_test_data)
+    ax = axes[idx]
+    ax.scatter(y_test, y_pred, alpha=0.6)
+    ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], color='red', linestyle='--', linewidth=2)
+    ax.set_xlabel('Actual Picking Time')
+    ax.set_ylabel('Predicted Picking Time')
+    ax.set_title(name)
+    ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.savefig(os.path.join(output_dir, 'Task8_all_models_prediction_grid.png'))
+plt.close()
+
+print('Task 8 completed: Combined prediction grid saved.')
